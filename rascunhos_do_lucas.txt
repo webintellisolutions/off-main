@@ -1,0 +1,40 @@
+// ... existing code ...
+
+const MainListItems = (props) => {
+  const { drawerClose, collapsed } = props;
+  const { whatsApps } = useContext(WhatsAppsContext);
+  const { user, handleLogout } = useContext(AuthContext);
+  const [connectionWarning, setConnectionWarning] = useState(false);
+  const [iconTheme, setIconTheme] = useState("color"); // State to control icon theme
+
+  const toggleIconTheme = () => {
+    setIconTheme(iconTheme === "color" ? "gray" : "color");
+  };
+
+  // Function to render icons based on the selected theme
+  const renderIcon = (icon) => {
+    if (iconTheme === "gray") {
+      // Render gray icons
+      return <img src={icon} style={{ filter: "grayscale(100%)" }} />;
+    } else {
+      // Render colored icons
+      return <img src={icon} />;
+    }
+  };
+
+  return (
+    <div>
+      {/* Your existing code */}
+      <button onClick={toggleIconTheme}>Toggle Icon Theme</button>
+      {/* Update icon rendering based on the selected theme */}
+      <ListItemLink
+        to="/tickets"
+        primary={i18n.t("mainDrawer.listItems.tickets")}
+        icon={renderIcon(tickets)}
+      />
+      {/* Continue updating icon rendering for other icons */}
+    </div>
+  );
+};
+
+export default MainListItems;
